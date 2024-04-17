@@ -34,9 +34,10 @@ Future<Iterable<ClassElement>> findClassElements({
   );
 
   List<FileSystemEntity> dartFiles = [];
-  searchPath.forEach((element) {
-    dartFiles.addAll(Directory(makePackageSubPath(element))
+  searchPath.forEach((regExpPath) {
+    dartFiles.addAll(Directory(makePackageSubPath('lib'))
         .listSync(recursive: true)
+        .where((element) => RegExp(regExpPath).hasMatch(element.path))
         .where((file) => path.extension(file.path) == '.dart')
         .where((file) => !exportedOnly || !file.path.contains('lib/src/')));
   });
