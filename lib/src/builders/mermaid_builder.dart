@@ -81,7 +81,7 @@ class MermaidBuilder implements DiagramBuilder {
     if (element.isAbstract) {
       _lines.add('<<abstract>> $_currentClass');
     }
-    if (element.isEnum) {
+    if (element.isDartCoreEnum) {
       _lines.add('<<enumeration>> $_currentClass');
     }
   }

@@ -25,7 +25,7 @@ class ClassElementCollector extends RecursiveElementVisitor<void> {
   }
 
   @override
-  void visitExportElement(ExportElement element) {
+  void visitLibraryExportElement(LibraryExportElement element) {
     if (!_exportOnly) {
       return;
     }
