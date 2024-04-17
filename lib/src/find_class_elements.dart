@@ -11,7 +11,7 @@ import 'package:path/path.dart' as path;
 Future<Iterable<ClassElement>> findClassElements({
   required String packagePath,
   required bool exportedOnly,
-  required String searchPath,
+  required Iterable<String> searchPath,
 }) async {
   String makePackageSubPath(String part0, [String part1 = '']) =>
       path.normalize(
@@ -33,10 +33,18 @@ Future<Iterable<ClassElement>> findClassElements({
     ],
   );
 
-  final dartFiles = Directory(makePackageSubPath(searchPath))
-      .listSync(recursive: true)
-      .where((file) => path.extension(file.path) == '.dart')
-      .where((file) => !exportedOnly || !file.path.contains('lib/src/'));
+  List<FileSystemEntity> dartFiles = [];
+  searchPath.forEach((element) {
+    dartFiles.addAll(Directory(makePackageSubPath(element))
+        .listSync(recursive: true)
+        .where((file) => path.extension(file.path) == '.dart')
+        .where((file) => !exportedOnly || !file.path.contains('lib/src/')));
+  });
+
+  // dartFiles
+  //     .map((element) => path.relative(path.dirname(element.path)))
+  //     .toSet()
+  //     .forEach(print);
 
   final collector = ClassElementCollector(
     exportedOnly: exportedOnly,

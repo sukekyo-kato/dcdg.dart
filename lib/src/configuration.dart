@@ -34,7 +34,7 @@ abstract class Configuration {
 
   String get packagePath;
 
-  String get searchPath;
+  Iterable<String> get searchPath;
 
   bool get shouldShowHelp;
 
@@ -141,7 +141,7 @@ class ConfigurationImpl implements Configuration {
   final String packagePath;
 
   @override
-  final String searchPath;
+  final Iterable<String> searchPath;
 
   @override
   final bool shouldShowHelp;

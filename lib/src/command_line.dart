@@ -99,12 +99,12 @@ final argParser = ArgParser(usageLineLength: 80)
     valueHelp: 'DIR',
     defaultsTo: '.',
   )
-  ..addOption(
+  ..addMultiOption(
     searchPathOption,
     abbr: 's',
     help: 'Directory relative to the package root to search for classes',
     valueHelp: 'DIR',
-    defaultsTo: 'lib',
+    defaultsTo: ['lib'],
   )
   ..addFlag(
     versionOption,
